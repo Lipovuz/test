@@ -1,11 +1,8 @@
 <?php
 
-namespace core\patterns;
+namespace core\validators;
 
 use core\abstracts\AbstractValidator;
-use core\validators\EmailValidator;
-use core\validators\RequiredValidator;
-use core\validators\TrimValidator;
 use http\Exception\InvalidArgumentException;
 
 /**

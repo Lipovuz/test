@@ -2,7 +2,7 @@
 
 namespace core\abstracts;
 
-use core\patterns\ValidatorFactory;
+use core\validators\ValidatorFactory;
 use ReflectionClass;
 use ReflectionProperty;
 
