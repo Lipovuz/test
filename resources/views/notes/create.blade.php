@@ -18,6 +18,7 @@
                                 <input type="text" class="form-control {{ $errors->has('text') ? 'is-invalid' : '' }}" name="text">
                                 @error('text') <div class="invalid-feedback"> {{ $message }} </div> @enderror
                             </div>
+                            <br>
                             <button type="submit" class="btn btn-primary btn-flat pull-right">
                                 {{ __('Зберегти') }}
                             </button>

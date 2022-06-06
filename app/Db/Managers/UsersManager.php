@@ -4,6 +4,9 @@ namespace App\Db\Managers;
 
 use App\Http\Requests\ProfileForm;
 use App\Db\Models\User;
+use App\Http\Requests\RegisterForm;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -18,6 +21,37 @@ class UsersManager
      * @var User|null
      */
     protected ?User $lastModel;
+    /**
+     * @var Dispatcher
+     */
+    protected Dispatcher $dispatcher;
+
+    public function __construct(Dispatcher $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
+    /**
+     * Редактирование пользователя
+     *
+     * @param RegisterForm $request
+     * @return bool
+     */
+    public function createProfile(RegisterForm $request): bool
+    {
+        $this->lastModel = new User();
+        $data = $request->validated();
+
+        if (isset($data['password']) && $data['password']) {
+            $this->lastModel->setPassword($data['password']);
+        }
+
+        $this->lastModel->fill($data);
+
+        $this->dispatcher->dispatch(new Registered($this->lastModel));
+
+        return $this->lastModel->save();
+    }
 
     /**
      * Редактирование пользователя
@@ -43,6 +77,7 @@ class UsersManager
         }
 
         $this->lastModel->fill($data);
+
         return $this->lastModel->save();
     }
 }

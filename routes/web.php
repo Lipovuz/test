@@ -28,6 +28,12 @@ Route::post('/profile-update', [App\Http\Controllers\User\UserController::class,
 //NoteController
 Route::get('/note-create', [App\Http\Controllers\Note\NoteController::class, 'createShow'])->name('get.note.create');
 Route::post('/note-create', [App\Http\Controllers\Note\NoteController::class, 'create'])->name('post.note.create');
+Route::get('/note-update/{id}', [App\Http\Controllers\Note\NoteController::class, 'updateShow'])
+    ->name('get.note.update')
+    ->where('id', '[0-9]+');;
+Route::post('/note-update/{id}', [App\Http\Controllers\Note\NoteController::class, 'update'])
+    ->name('post.note.update')
+    ->where('id', '[0-9]+');;
 Route::get('/note/remove/{id}',  [App\Http\Controllers\Note\NoteController::class, 'remove'])
     ->name('note.remove')
     ->where('id', '[0-9]+');

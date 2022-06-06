@@ -16,7 +16,11 @@
                     @foreach($user->notes as $note)
                         <div class="wrapper" style="display: inline-block; vertical-align: middle;">
                             <div class="left_block">
+                                @if($user->image)
                                 <img class="img" alt="" src="{{$user->image}}">
+                                @else
+                                    <img class="img" alt="" src="/storage/image_file.png">
+                                @endif
                             </div>
                             <div>
                                 <b>{{$note->name}}</b>
@@ -25,6 +29,9 @@
 
                             </div>
                             <div class="pull-right">
+                                <a href="{{route('get.note.update', $note->id)}}" class="btn btn-sm btn-primary">
+                                    {{ __('Редагувати') }}
+                                </a>
                                 <a href="{{route('note.remove', $note->id)}}" class="btn btn-sm btn-danger">
                                     {{ __('Видалити') }}
                                 </a>
